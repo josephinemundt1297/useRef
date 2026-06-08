@@ -1,17 +1,18 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 function App() {
   // Hier die Hooks use...
   const inputingRef = useRef(null);
   // Hier meine Funktionen für die Logik
-  // function namenAufrufen() {
-  //   console.log("Josi");
-  // }
-  function handleFocus() {
-    console.log(inputingRef.current);
 
-    inputingRef.current.focus();
+  function autoFokus() {}
+  useEffect(() => {
+    inputingRef.current?.focus();
+  }, []);
+
+  function handleFocus() {
+    inputingRef.current?.focus();
   }
 
   function clearFocus() {
@@ -24,11 +25,9 @@ function App() {
     <>
       <h1>useRef Playground</h1>
       <form>
-        <input
-          ref={inputingRef}
-          type="text"
-          placeholder="vollständiger Name"
-        ></input>
+        <input ref={inputingRef} type="text" placeholder="Name"></input>
+        <input type="button" type="text" placeholder="Nachname" />
+        <input type="button" type="email" placeholder="E-Mail" />
         <button onClick={handleFocus} type="button">
           Fokus setzen
         </button>
