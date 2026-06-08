@@ -4,21 +4,36 @@ import "./App.css";
 function App() {
   // Hier die Hooks use...
   const inputingRef = useRef(null);
+  const nachnameRef = useRef(null);
+  const emailRef = useRef(null);
   // Hier meine Funktionen für die Logik
 
-  function autoFokus() {}
-  useEffect(() => {
-    inputingRef.current?.focus();
-  }, []);
-
-  function handleFocus() {
-    inputingRef.current?.focus();
+  function autoFokus() {
+    if (inputingRef.current.value === "") {
+      inputingRef.current.focus();
+    }
+    if (nachnameRef.current.value === "") {
+      nachnameRef.current.focus();
+    }
+    if (emailRef.current.value === "") {
+      emailRef.current.focus();
+    }
   }
+  // useEffect(() => {
+  //   inputingRef.current?.focus();
+  // }, []);
+
+  // function handleFocus() {
+  //   inputingRef.current?.focus();
+  //   nachnameRef.current?.focus();
+  //   emailRef.current?.focus();
+  // }
 
   function clearFocus() {
     console.log("Eingabe leeren und fokussieren");
-    inputingRef.current.focus();
     inputingRef.current.value = "";
+    nachnameRef.current.value = "";
+    emailRef.current.value = "";
   }
 
   return (
@@ -26,9 +41,14 @@ function App() {
       <h1>useRef Playground</h1>
       <form>
         <input ref={inputingRef} type="text" placeholder="Name"></input>
-        <input type="button" type="text" placeholder="Nachname" />
-        <input type="button" type="email" placeholder="E-Mail" />
-        <button onClick={handleFocus} type="button">
+        <input
+          ref={nachnameRef}
+          type="button"
+          type="text"
+          placeholder="Nachname"
+        />
+        <input ref={emailRef} type="button" type="email" placeholder="E-Mail" />
+        <button onClick={autoFokus} type="button">
           Fokus setzen
         </button>
         <button onClick={clearFocus} type="button">
