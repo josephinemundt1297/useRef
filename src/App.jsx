@@ -6,16 +6,17 @@ function App() {
   const inputingRef = useRef(null);
   const nachnameRef = useRef(null);
   const emailRef = useRef(null);
+  const [anfangsDings, setDings] = useState("");
+  const renderCount = useRef(0);
+  renderCount.current += 1;
   // Hier meine Funktionen für die Logik
 
   function autoFokus() {
     if (inputingRef.current.value === "") {
       inputingRef.current.focus();
-    }
-    if (nachnameRef.current.value === "") {
+    } else if (nachnameRef.current.value === "") {
       nachnameRef.current.focus();
-    }
-    if (emailRef.current.value === "") {
+    } else if (emailRef.current.value === "") {
       emailRef.current.focus();
     }
   }
@@ -48,6 +49,14 @@ function App() {
           placeholder="Nachname"
         />
         <input ref={emailRef} type="button" type="email" placeholder="E-Mail" />
+        <textarea
+          name="dings"
+          id="da"
+          placeholder="Text mit Humor eingeben "
+          value={anfangsDings}
+          onChange={(e) => setDings(e.target.value)}
+        />
+        <div>Renders: {renderCount.current}</div>
         <button onClick={autoFokus} type="button">
           Fokus setzen
         </button>
